@@ -1,27 +1,63 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Psychic Game</title>
-  </head>
-  <body>
-	<h1>The Psychic Game</h1>
-  	<p>Guess what letter I'm thinking of</p>
-  	<p>Wins:</p>
-  	<p>Losses:</p>
-  	<p>Guesses Left:</p>
-	<p>Your Guesses so far: </p>
-	<script type="text/javascript">
-	{
-		if userGuess = "i", 
-	var myVar = win;
-	myVar = myVar + 1
-	
-	var myVar = lose;
-	myVar = myVar - 1
+    <link rel="stylesheet" href="./Assets/css/reset.css">
+     <link rel="stylesheet" href="./Assets/css/style.css">
+</head>
+<body>
+    <div id="game">
+        <h1>The Psychic Game</h1>
+        <p>Guess what letter I'm thinking of</p>
+        <p>Wins:</p>
+        <p>Losses:</p>
+        <p>Guesses Left:</p>
+        <p>Your Guesses so far: </p>
+    </div>
+    <script type="text/javascript">
+    src="./Assets/javascript/game.js"
+    
+    var wins = 0;
+      var losses = 0;
+      var guessesLeft = 9;
+      var guessesSoFar = [];
+      var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];                
+      document.onkeyup = function(event) {
+        var userGuess = tring.fromCharCode(event.keyCode).toLowerCase();
+        console.log("It worked")
+        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        guessesSoFar.push(userGuess);
+        if (userGuess == computerGuess) {
+            wins++;
+            alert('Nice guess');
+            guessesLeft = 9;
+            guessesSoFar.length = 0;
+        } else if (guessesLeft == 0) {
+            losses++;
+            alert('Try again');
+            guessesLeft = 9;
+            guessesSoFar.length = 0;
+        } else if (userGuess !== computerGuess) {
+            guessesLeft--;
+        }
+        var html = "<h1>The Psychic Game</h1>" +
+            "<p>Guess what letter I'm thinking of!</p>" +
+            "<p>Total Wins: " +
+            wins +
+            "</p>" +
+            "<p>Total Losses: " +
+            losses +
+            "</p>" +
+            "<p>Guesses Left: " +
+            guessesLeft +
+            "</p>" +
+            "<p>Your Guesses so far: " +
+            guessesSoFar +
+            "</p>";
 
-	}
-	
-	</script>
-  </body>
-  </html>
+        document.querySelector('#game').innerHTML = html;
+    }
+    </script>
+</body>
+</html> 
